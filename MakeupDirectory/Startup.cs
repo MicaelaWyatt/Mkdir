@@ -31,11 +31,7 @@ namespace MakeupDirectory
         {
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
 
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MakeupDirectory", Version = "v1" });
-            });
+            
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
             services
