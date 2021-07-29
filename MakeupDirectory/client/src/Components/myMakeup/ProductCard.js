@@ -7,14 +7,14 @@ export const ProductCard = ({ product, deleteAndSetProducts }) => {
     return (
         <Card>
             <CardBody>
-                <h3>name</h3>
-                <div>brand</div>
-                <div>ImageLink</div>
-                <div>Experation date</div>
+                <h3>{product.name}</h3>
+                <div>{product.brand}</div>
+                <div>{product.image_link}</div>
+                <div> EXPIRES ON {product.experationDate}</div>
                 <br></br>
-                {/* <button onClick={() => deleteAndSetPosts(post.id)}>Delete</button>
-                <Link to={`/post/${post.id}`}><button>Details</button></Link>
-                <Link to={`/post/edit/${post.id}`}><button>Edit</button></Link> */}
+                <button onClick={() => deleteAndSetProducts(product.id)}>Delete</button>
+                <Link to={`/post/${product.id}`}><button>Details</button></Link>
+                <Link to={`/post/edit/${product.id}`}><button>Edit</button></Link>
             </CardBody>
         </Card>
     )

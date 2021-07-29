@@ -3,6 +3,8 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
 import Hello from "./Hello";
+import ProductList from "./myMakeup/ProductList";
+import ProductForm from "./myMakeup/ProductForm";
 
 
 export default function ApplicationViews({ isLoggedIn }) {
@@ -14,13 +16,13 @@ export default function ApplicationViews({ isLoggedIn }) {
                     {isLoggedIn ? <Hello /> : <Redirect to="/login" />}
                 </Route>
 
-                {/* <Route path="/comment/PostId/:id" exact>
-                    {isLoggedIn ? <CommentList /> : <Redirect to="/login" />}
+                <Route path="/usersProducts/myproducts" exact>
+                    <ProductList />
                 </Route>
 
-                <Route path="/comment/add/:id" exact>
-                    {isLoggedIn ? <CommentAddForm /> : <Redirect to="/login" />}
-                </Route> */}
+                <Route path="/usersProducts/create" exact>
+                    <ProductForm />
+                </Route>
 
                 <Route path="/login">
                     <Login />

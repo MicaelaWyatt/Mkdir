@@ -17,10 +17,11 @@ namespace MakeupDirectory.Controllers
     public class UsersProductsController : ControllerBase
     {
         private readonly IUsersProductsRepository _usersProductsRepository;
-
-        public UsersProductsController(IUsersProductsRepository usersProductsRepository)
+        private readonly IUserProfileRepository _userProfileRepository;
+        public UsersProductsController(IUsersProductsRepository usersProductsRepository, IUserProfileRepository userProfileRepository)
         {
             _usersProductsRepository = usersProductsRepository;
+            _userProfileRepository = userProfileRepository;
         }
 
         [HttpGet("{id}")]
@@ -38,7 +39,8 @@ namespace MakeupDirectory.Controllers
         public IActionResult Post(UsersProducts product)
         {
             product.CreateDateTime = DateTime.Now;
-            //product.UserProfileId = GetCurrentUserProfile().Id;
+            product.ExperationDate = DateTime.Now;
+            product.UserProfileId = GetCurrentUserProfile().Id;
             if (string.IsNullOrWhiteSpace(product.Image_link))
             {
                 product.Image_link = null;
@@ -80,12 +82,17 @@ namespace MakeupDirectory.Controllers
         }
 
         //GET: api/userproducts/myproducts
+        
         [HttpGet("MyProducts")]
-        public IActionResult GetCurrentUserProducts()
+        public IActionResult GetAllProductsFromCurrentUser()
         {
-            UserProfile CurrentUser = GetCurrentUserProfile();
-            string FirebaseUserId = CurrentUser.FirebaseUserId;
-            return Ok(_usersProductsRepository.GetAllProductsFromCurrentUser(FirebaseUserId));
+            string CurrentUserProfileId = GetCurrentFirebaseUserProfileId();
+            var products = _usersProductsRepository.GetAllProductsFromCurrentUser(CurrentUserProfileId);
+            if(products == null)
+            {
+                return NotFound();
+            }
+            return Ok(products);
         }
 
     }

@@ -49,7 +49,7 @@ namespace MakeupDirectory.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Users (FirebaseUserId, Name, Email)
+                    cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, Name, Email)
                                         OUTPUT INSERTED.ID
                                         VALUES (@FirebaseUserId, @Name, @Email)";
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
