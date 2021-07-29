@@ -22,14 +22,9 @@ export const getAllProductsFromCurrentUser = () => {
                 Authorization: `Bearer ${token}`
 
             }
-        }).then(resp => {
-            if (resp.ok) {
-                return resp.json();
-            } else {
-                throw new Error("An unknown error occurred while trying to get your products.");
-            }
-        });
+        }).then(resp => resp.json())
     });
+
 };
 
 export const addProduct = (product) => {

@@ -22,7 +22,7 @@ const ProductList = () => {
     // add link to when you have created add form 
     return (
         <>
-            <Link to="/post/create" > Add Product </Link>
+            <Link to="/usersProducts/create" > Add Product </Link>
             <div>
                 <div>
                     {products.map((product) => (

@@ -8,9 +8,9 @@ export const ProductCard = ({ product, deleteAndSetProducts }) => {
         <Card>
             <CardBody>
                 <h3>{product.name}</h3>
-                <div>brand</div>
-                <div>ImageLink</div>
-                <div>Experation date</div>
+                <div>{product.brand}</div>
+                <div>{product.image_link}</div>
+                <div> EXPIRES ON {product.experationDate}</div>
                 <br></br>
                 <button onClick={() => deleteAndSetProducts(product.id)}>Delete</button>
                 <Link to={`/post/${product.id}`}><button>Details</button></Link>

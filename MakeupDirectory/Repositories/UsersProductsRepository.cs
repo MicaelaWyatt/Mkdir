@@ -44,7 +44,7 @@ namespace MakeupDirectory.Repositories
                 }
             }
         }
-        public List<UsersProducts> GetAllProductsFromCurrentUser(string firebaseId)
+        public List<UsersProducts> GetAllProductsFromCurrentUser(string firebaseUserId)
         {
             using (var conn = Connection)
             {
@@ -66,9 +66,9 @@ namespace MakeupDirectory.Repositories
                     LEFT JOIN UserProfile u ON up.UserProfileId = u.Id
                     LEFT JOIN Notes n ON up.Id = n.ProductId
                     WHERE u.FirebaseUserId = @firebaseUserId
-                    ORDER BY up.ExperationDate DESC";
+                    ";
 
-                    cmd.Parameters.AddWithValue("@firebaseUserId", firebaseId);
+                    DbUtils.AddParameter(cmd,"@firebaseUserId", firebaseUserId);
                     var reader = cmd.ExecuteReader();
 
                     var products = new List<UsersProducts>();
@@ -80,7 +80,7 @@ namespace MakeupDirectory.Repositories
                         {
                             existingProduct = new UsersProducts()
                             {
-                                Id = DbUtils.GetInt(reader, "ProductId"),
+                                Id = productId,
                                 Name = DbUtils.GetString(reader, "ProductName"),
                                 Brand = DbUtils.GetString(reader, "Brand"),
                                 Image_link = DbUtils.GetString(reader, "Image_link"),
@@ -94,13 +94,6 @@ namespace MakeupDirectory.Repositories
                                     Name = DbUtils.GetString(reader, "CategoryName")
                                 },
                                 UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
-                                UserProfile = new UserProfile()
-                                {
-                                    Id = DbUtils.GetInt(reader, "UserProfileId"),
-                                    Name = DbUtils.GetString(reader, "UsersName"),
-                                    Email = DbUtils.GetString(reader, "Email"),
-                                    FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId")
-                                },
                                 Notes = new List<Notes>()
                             };
 
@@ -207,10 +200,10 @@ namespace MakeupDirectory.Repositories
                 {
                     cmd.CommandText = @"
                     INSERT INTO UsersProducts 
-                    (Name, Brand, Image_link, CreateDateTime, ExperationDate, PeriodAfterOpening, CategoryId, NotesId, UserProfileId)
+                    (Name, Brand, Image_link, CreateDateTime, ExperationDate, PeriodAfterOpening, CategoryId, UserProfileId)
                     OUTPUT INSERTED.ID
                     VALUES (
-                    @Name, @Brand, @Image_link, @CreateDateTime, @ExerationDate, @PeriodAfterOpening, @CategoryId, @NotesId, @UserProfileId)";
+                    @Name, @Brand, @Image_link, @CreateDateTime, @ExperationDate, @PeriodAfterOpening, @CategoryId, @UserProfileId)";
                     DbUtils.AddParameter(cmd, "@Name", product.Name);
                     DbUtils.AddParameter(cmd, "@Brand", product.Brand);
                     DbUtils.AddParameter(cmd, "@Image_link", product.Image_link);
@@ -218,7 +211,6 @@ namespace MakeupDirectory.Repositories
                     DbUtils.AddParameter(cmd, "@ExperationDate", product.ExperationDate);
                     DbUtils.AddParameter(cmd, "@PeriodAfterOpening", product.PeriodAfterOpening);
                     DbUtils.AddParameter(cmd, "@CategoryId", product.CategoryId);
-                    DbUtils.AddParameter(cmd, "@NotesId", product.NotesId);
                     DbUtils.AddParameter(cmd, "@UserProfileId", product.UserProfileId);
 
                     product.Id = (int)cmd.ExecuteScalar();

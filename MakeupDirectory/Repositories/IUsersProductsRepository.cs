@@ -7,7 +7,7 @@ namespace MakeupDirectory.Repositories
     {
         void AddProduct(UsersProducts product);
         void DeleteProduct(int id);
-        List<UsersProducts> GetAllProductsFromCurrentUser(string firebaseId);
+        List<UsersProducts> GetAllProductsFromCurrentUser(string firebaseUserId);
         UserProfile GetByFirebaseUserId(string firebaseUserId);
         UsersProducts GetProductById(int Id);
         void UpdateProduct(UsersProducts product);

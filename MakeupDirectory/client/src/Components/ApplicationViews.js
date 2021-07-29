@@ -4,6 +4,7 @@ import Login from "./Login";
 import Register from "./Register";
 import Hello from "./Hello";
 import ProductList from "./myMakeup/ProductList";
+import ProductForm from "./myMakeup/ProductForm";
 
 
 export default function ApplicationViews({ isLoggedIn }) {
@@ -19,9 +20,9 @@ export default function ApplicationViews({ isLoggedIn }) {
                     <ProductList />
                 </Route>
 
-                {/* <Route path="/comment/add/:id" exact>
-                    {isLoggedIn ? <CommentAddForm /> : <Redirect to="/login" />}
-                </Route> */}
+                <Route path="/usersProducts/create" exact>
+                    <ProductForm />
+                </Route>
 
                 <Route path="/login">
                     <Login />

@@ -39,7 +39,8 @@ namespace MakeupDirectory.Controllers
         public IActionResult Post(UsersProducts product)
         {
             product.CreateDateTime = DateTime.Now;
-            //product.UserProfileId = GetCurrentUserProfile().Id;
+            product.ExperationDate = DateTime.Now;
+            product.UserProfileId = GetCurrentUserProfile().Id;
             if (string.IsNullOrWhiteSpace(product.Image_link))
             {
                 product.Image_link = null;
