@@ -15,14 +15,22 @@ export const getProductById = (id) => {
 }
 
 export const getAllProductsFromCurrentUser = () => {
-    return getToken().then((token) =>
-        fetch(`${baseUrl}/myproducts`, {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/MyProducts`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`
+
             }
-        }).then(res = res.json()));
-}
+        }).then(resp => {
+            if (resp.ok) {
+                return resp.json();
+            } else {
+                throw new Error("An unknown error occurred while trying to get your products.");
+            }
+        });
+    });
+};
 
 export const addProduct = (product) => {
     return getToken().then((token) =>
@@ -33,10 +41,10 @@ export const addProduct = (product) => {
                 Authorization: `Bearer ${token}`
             },
             body: JSON.stringify(product)
-        }).then(res = res.json()));
+        }).then(res => res.json()));
 };
 
-export const deleteProduct (id) => {
+export const deleteProduct = (id) => {
     return getToken().then((token) =>
         fetch(`${baseUrl}/${id}`, {
             method: "DELETE",

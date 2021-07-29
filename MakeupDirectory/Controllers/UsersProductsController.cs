@@ -17,10 +17,11 @@ namespace MakeupDirectory.Controllers
     public class UsersProductsController : ControllerBase
     {
         private readonly IUsersProductsRepository _usersProductsRepository;
-
-        public UsersProductsController(IUsersProductsRepository usersProductsRepository)
+        private readonly IUserProfileRepository _userProfileRepository;
+        public UsersProductsController(IUsersProductsRepository usersProductsRepository, IUserProfileRepository userProfileRepository)
         {
             _usersProductsRepository = usersProductsRepository;
+            _userProfileRepository = userProfileRepository;
         }
 
         [HttpGet("{id}")]
@@ -80,12 +81,17 @@ namespace MakeupDirectory.Controllers
         }
 
         //GET: api/userproducts/myproducts
+        
         [HttpGet("MyProducts")]
-        public IActionResult GetCurrentUserProducts()
+        public IActionResult GetAllProductsFromCurrentUser()
         {
-            UserProfile CurrentUser = GetCurrentUserProfile();
-            string FirebaseUserId = CurrentUser.FirebaseUserId;
-            return Ok(_usersProductsRepository.GetAllProductsFromCurrentUser(FirebaseUserId));
+            string CurrentUserProfileId = GetCurrentFirebaseUserProfileId();
+            var products = _usersProductsRepository.GetAllProductsFromCurrentUser(CurrentUserProfileId);
+            if(products == null)
+            {
+                return NotFound();
+            }
+            return Ok(products);
         }
 
     }
