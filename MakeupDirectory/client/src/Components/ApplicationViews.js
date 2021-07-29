@@ -5,6 +5,7 @@ import Register from "./Register";
 import Hello from "./Hello";
 import ProductList from "./myMakeup/ProductList";
 import ProductForm from "./myMakeup/ProductForm";
+import { ProductDetails } from "./myMakeup/ProductDetails";
 
 
 export default function ApplicationViews({ isLoggedIn }) {
@@ -22,6 +23,9 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                 <Route path="/usersProducts/create" exact>
                     <ProductForm />
+                </Route>
+                <Route path="/usersProducts/:productId(\d+)" exact>
+                    <ProductDetails />
                 </Route>
 
                 <Route path="/login">
