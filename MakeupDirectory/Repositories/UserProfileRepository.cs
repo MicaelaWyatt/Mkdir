@@ -17,7 +17,7 @@ namespace MakeupDirectory.Repositories
                 {
                     cmd.CommandText = @"
                         SELECT Id, [Name], Email, FirebaseUserId
-                          FROM Users
+                          FROM UserProfile
                          WHERE FirebaseUserId = @FirebaseuserId";
 
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);

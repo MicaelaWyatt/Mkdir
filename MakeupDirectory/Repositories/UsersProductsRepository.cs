@@ -2,6 +2,7 @@
 using MakeupDirectory.Models;
 using MakeupDirectory.Utils;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MakeupDirectory.Repositories
 {
@@ -9,6 +10,40 @@ namespace MakeupDirectory.Repositories
     {
         public UsersProductsRepository(IConfiguration configuration) : base(configuration) { }
 
+
+        public UserProfile GetByFirebaseUserId(string firebaseUserId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT up.Id, up.Name, up.Email, up.FirebaseUserId
+                          FROM UserProfile up
+                         WHERE FirebaseUserId = @FirebaseuserId";
+
+                    DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
+
+                    UserProfile userProfile = null;
+
+                    var reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        userProfile = new UserProfile()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            Name = DbUtils.GetString(reader, "Name"),
+                            Email = DbUtils.GetString(reader, "Email"),
+                            FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId")
+                        };
+                    }
+                    reader.Close();
+
+                    return userProfile;
+                }
+            }
+        }
         public List<UsersProducts> GetAllProductsFromCurrentUser(string firebaseId)
         {
             using (var conn = Connection)
@@ -24,12 +59,12 @@ namespace MakeupDirectory.Repositories
                     up.CreateDateTime, up.ExperationDate,
                     up.PeriodAfterOpening,up.CategoryId,
                     c.Name AS CategoryName,
-                    up.NotesId,n.Content,
+                    n.Id AS NotesId,n.Content,
                     up.UserProfileId, u.Name AS UsersName,u.Email,u.FirebaseUserId
                     FROM UsersProducts up
                     LEFT JOIN Category c ON up.CategoryId = c.Id
                     LEFT JOIN UserProfile u ON up.UserProfileId = u.Id
-                    LEFT JOIN Notes n ON up.NotesId = n.Id
+                    LEFT JOIN Notes n ON up.Id = n.ProductId
                     WHERE u.FirebaseUserId = @firebaseUserId
                     ORDER BY up.ExperationDate DESC";
 
@@ -39,36 +74,46 @@ namespace MakeupDirectory.Repositories
                     var products = new List<UsersProducts>();
                     while (reader.Read())
                     {
-                        products.Add(new UsersProducts()
+                        var productId = DbUtils.GetInt(reader, "ProductId");
+                        var existingProduct = products.FirstOrDefault(p => p.Id == productId);
+                        if(existingProduct == null)
                         {
-                            Id = DbUtils.GetInt(reader, "ProductId"),
-                            Name = DbUtils.GetString(reader, "ProductName"),
-                            Brand = DbUtils.GetString(reader, "Brand"),
-                            Image_link = DbUtils.GetString(reader, "Image_link"),
-                            CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
-                            ExperationDate = DbUtils.GetDateTime(reader, "ExperationDate"),
-                            PeriodAfterOpening = DbUtils.GetInt(reader, "PeriodAfterOpening"),
-                            CategoryId = DbUtils.GetInt(reader, "CategoryId"),
-                            Category = new Category()
+                            existingProduct = new UsersProducts()
                             {
-                                Id = DbUtils.GetInt(reader, "CategoryId"),
-                                Name = DbUtils.GetString(reader, "CategoryName")
-                            },
-                            NotesId = DbUtils.GetInt(reader, "NotesId"),
-                            Notes = new Notes()
+                                Id = DbUtils.GetInt(reader, "ProductId"),
+                                Name = DbUtils.GetString(reader, "ProductName"),
+                                Brand = DbUtils.GetString(reader, "Brand"),
+                                Image_link = DbUtils.GetString(reader, "Image_link"),
+                                CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
+                                ExperationDate = DbUtils.GetDateTime(reader, "ExperationDate"),
+                                PeriodAfterOpening = DbUtils.GetInt(reader, "PeriodAfterOpening"),
+                                CategoryId = DbUtils.GetInt(reader, "CategoryId"),
+                                Category = new Category()
+                                {
+                                    Id = DbUtils.GetInt(reader, "CategoryId"),
+                                    Name = DbUtils.GetString(reader, "CategoryName")
+                                },
+                                UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                                UserProfile = new UserProfile()
+                                {
+                                    Id = DbUtils.GetInt(reader, "UserProfileId"),
+                                    Name = DbUtils.GetString(reader, "UsersName"),
+                                    Email = DbUtils.GetString(reader, "Email"),
+                                    FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId")
+                                },
+                                Notes = new List<Notes>()
+                            };
+
+                            products.Add(existingProduct);
+                        }
+                        if(DbUtils.IsNotDbNull(reader,"NotesId"))
+                        {
+                            existingProduct.Notes.Add(new Notes()
                             {
                                 Id = DbUtils.GetInt(reader, "NotesId"),
                                 Content = DbUtils.GetString(reader, "Content")
-                            },
-                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
-                            UserProfile = new UserProfile()
-                            {
-                                Id = DbUtils.GetInt(reader, "UserProfileId"),
-                                Name = DbUtils.GetString(reader, "UsersName"),
-                                Email = DbUtils.GetString(reader, "Email"),
-                                FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId")
-                            }
-                        });
+                            });
+                        }
                     }
                     reader.Close();
 
@@ -84,7 +129,7 @@ namespace MakeupDirectory.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"
+                    cmd.CommandText = @" 
                     SELECT 
                     up.Id As ProductId,
                     up.Name AS ProductName,
@@ -92,50 +137,58 @@ namespace MakeupDirectory.Repositories
                     up.CreateDateTime, up.ExperationDate,
                     up.PeriodAfterOpening,up.CategoryId,
                     c.Name AS CategoryName,
-                    up.NotesId,n.Content,
+                    n.Id AS NotesId,n.Content,
                     up.UserProfileId, u.Name AS UsersName,u.Email,u.FirebaseUserId
                     FROM UsersProducts up
                     LEFT JOIN Category c ON up.CategoryId = c.Id
                     LEFT JOIN UserProfile u ON up.UserProfileId = u.Id
-                    LEFT JOIN Notes n ON up.NotesId = n.Id
+                    LEFT JOIN Notes n ON up.Id = n.ProductId
                     WHERE up.Id = @Id";
                     DbUtils.AddParameter(cmd, "@Id", Id);
                     var reader = cmd.ExecuteReader();
 
                     UsersProducts product = null;
 
-                    if (reader.Read())
+                    while (reader.Read())
                     {
-                        product = new UsersProducts()
+                        if(product == null)
                         {
-                            Id = DbUtils.GetInt(reader, "ProductId"),
-                            Name = DbUtils.GetString(reader, "ProductName"),
-                            Brand = DbUtils.GetString(reader, "Brand"),
-                            Image_link = DbUtils.GetString(reader, "Image_link"),
-                            CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
-                            ExperationDate = DbUtils.GetDateTime(reader, "ExperationDate"),
-                            PeriodAfterOpening = DbUtils.GetInt(reader, "PeriodAfterOpening"),
-                            CategoryId = DbUtils.GetInt(reader, "CategoryId"),
-                            Category = new Category()
+                            product = new UsersProducts()
                             {
-                                Id = DbUtils.GetInt(reader, "CategoryId"),
-                                Name = DbUtils.GetString(reader, "CategoryName")
-                            },
-                            NotesId = DbUtils.GetInt(reader, "NotesId"),
-                            Notes = new Notes()
+                                Id = DbUtils.GetInt(reader, "ProductId"),
+                                Name = DbUtils.GetString(reader, "ProductName"),
+                                Brand = DbUtils.GetString(reader, "Brand"),
+                                Image_link = DbUtils.GetString(reader, "Image_link"),
+                                CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
+                                ExperationDate = DbUtils.GetDateTime(reader, "ExperationDate"),
+                                PeriodAfterOpening = DbUtils.GetInt(reader, "PeriodAfterOpening"),
+                                CategoryId = DbUtils.GetInt(reader, "CategoryId"),
+                                Category = new Category()
+                                {
+                                    Id = DbUtils.GetInt(reader, "CategoryId"),
+                                    Name = DbUtils.GetString(reader, "CategoryName")
+                                },
+                                Notes = new List<Notes>(),
+                                UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                                UserProfile = new UserProfile()
+                                {
+                                    Id = DbUtils.GetInt(reader, "UserProfileId"),
+                                    Name = DbUtils.GetString(reader, "UsersName"),
+                                    Email = DbUtils.GetString(reader, "Email"),
+                                    FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId")
+                                }
+                            };
+
+                        }
+                        if (DbUtils.IsNotDbNull(reader, "NotesId"))
+                        {
+                            product.Notes.Add(new Notes()
                             {
-                                Id = DbUtils.GetInt(reader, "NotesId"),
-                                Content = DbUtils.GetString(reader, "Content")
-                            },
-                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
-                            UserProfile = new UserProfile()
-                            {
-                                Id = DbUtils.GetInt(reader, "UserProfileId"),
-                                Name = DbUtils.GetString(reader, "UsersName"),
-                                Email = DbUtils.GetString(reader, "Email"),
-                                FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId")
-                            }
-                        };
+                                Id=DbUtils.GetInt(reader,"NotesId"),
+                                Content= DbUtils.GetString(reader, "Content")
+                            });                        
+                        }
+                        
                     }
 
                     reader.Close();

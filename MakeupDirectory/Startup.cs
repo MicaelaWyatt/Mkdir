@@ -31,6 +31,7 @@ namespace MakeupDirectory
         {
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddTransient<IUsersProductsRepository, UsersProductsRepository>();
+            services.AddTransient<INotesRepository, NotesRepository>();
 
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");

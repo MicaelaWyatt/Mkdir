@@ -19,6 +19,6 @@ namespace MakeupDirectory.Models
         public int UserProfileId { get; set; }
         public UserProfile UserProfile { get; set; }
         public Category Category { get; set; }
-        public Notes Notes { get; set; }
+        public List<Notes> Notes { get; set; }
     }
 }
