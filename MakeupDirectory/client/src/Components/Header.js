@@ -29,16 +29,10 @@ export default function Header({ isLoggedIn }) {
                                     <NavLink tag={RRNavLink} to="">Home</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={RRNavLink} to=''>Tag Management</NavLink>
+                                    <NavLink tag={RRNavLink} to=''>My Makeup</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={RRNavLink} to=''>Posts</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink tag={RRNavLink} to=''>My Posts</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink tag={RRNavLink} to=''>Category Management</NavLink>
+                                    <NavLink tag={RRNavLink} to=''>Add Product</NavLink>
                                 </NavItem>
                             </>
                         }

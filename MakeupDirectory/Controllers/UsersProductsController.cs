@@ -11,6 +11,7 @@ using MakeupDirectory.Repositories;
 
 namespace MakeupDirectory.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersProductsController : ControllerBase
@@ -63,6 +64,28 @@ namespace MakeupDirectory.Controllers
 
             _usersProductsRepository.UpdateProduct(product);
             return NoContent();
+        }
+
+
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _usersProductsRepository.GetByFirebaseUserId(firebaseUserId);
+        }
+
+        private string GetCurrentFirebaseUserProfileId()
+        {
+            string Id = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return Id;
+        }
+
+        //GET: api/userproducts/myproducts
+        [HttpGet("MyProducts")]
+        public IActionResult GetCurrentUserProducts()
+        {
+            UserProfile CurrentUser = GetCurrentUserProfile();
+            string FirebaseUserId = CurrentUser.FirebaseUserId;
+            return Ok(_usersProductsRepository.GetAllProductsFromCurrentUser(FirebaseUserId));
         }
 
     }
