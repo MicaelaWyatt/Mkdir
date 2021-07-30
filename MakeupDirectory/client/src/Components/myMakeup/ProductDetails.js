@@ -44,7 +44,7 @@ export const ProductDetails = () => {
                     <div> EXPIRES ON {product.experationDate}</div>
                     <br></br>
                     {/* <button onClick={() => deleteAndSetProducts(product.id)}>Delete</button> */}
-                    <Link to={`/post/edit/${product.id}`}><button>Edit</button></Link>
+                    <Link to={`/usersProducts/${productId}/edit`}><button>Edit</button></Link>
                 </CardBody>
             </Card>
             <h2>Notes</h2>

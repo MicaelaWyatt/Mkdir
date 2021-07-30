@@ -35,3 +35,15 @@ export const deleteNote = (id) => {
             }
         }));
 };
+
+export const updateNote = (id) => {
+    return getToken().then((token) =>
+        fetch(`${baseUrl}/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify(id)
+        }));
+}
