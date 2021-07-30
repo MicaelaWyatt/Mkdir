@@ -40,6 +40,39 @@ namespace MakeupDirectory.Repositories
                 }
             }
         }
+
+        public List<Notes> GetAllNotesFromProduct(int Id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    SELECT 
+                    Id,Content,ProductId,CreateDateTime
+                    FROM Notes
+                    WHERE ProductId = @Id ";
+                    DbUtils.AddParameter(cmd, "@Id", Id);
+                    var reader = cmd.ExecuteReader();
+
+                    var notes = new List<Notes>();
+                    while (reader.Read())
+                    {
+                        notes.Add(new Notes()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            Content = DbUtils.GetString(reader, "Content"),
+                            ProductId = DbUtils.GetInt(reader, "ProductId"),
+                            CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime")
+                        });
+                    }
+                    reader.Close();
+
+                    return notes;
+                }
+            }
+        }
         public void AddNote(Notes note)
         {
             using (var conn = Connection)

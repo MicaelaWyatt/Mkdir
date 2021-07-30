@@ -13,7 +13,7 @@ export const ProductCard = ({ product, deleteAndSetProducts }) => {
                 <div> EXPIRES ON {product.experationDate}</div>
                 <br></br>
                 <button onClick={() => deleteAndSetProducts(product.id)}>Delete</button>
-                <Link to={`/post/${product.id}`}><button>Details</button></Link>
+                <Link to={`/usersProducts/${product.id}`}><button>Details</button></Link>
                 <Link to={`/post/edit/${product.id}`}><button>Edit</button></Link>
             </CardBody>
         </Card>

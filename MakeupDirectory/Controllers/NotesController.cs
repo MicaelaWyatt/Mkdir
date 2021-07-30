@@ -31,9 +31,21 @@ namespace MakeupDirectory.Controllers
             return Ok(notes);
         }
 
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var notes = _notesRepository.GetAllNotesFromProduct(id);
+            if (notes == null)
+            {
+                return NotFound();
+            }
+            return Ok(notes);
+        }
+
         [HttpPost]
         public IActionResult Post(Notes note)
         {
+            note.CreateDateTime = DateTime.Now;
             _notesRepository.AddNote(note);
             return CreatedAtAction("Get", new { id = note.Id }, note);
         }
