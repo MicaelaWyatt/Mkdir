@@ -45,6 +45,7 @@ namespace MakeupDirectory.Controllers
         [HttpPost]
         public IActionResult Post(Notes note)
         {
+            note.CreateDateTime = DateTime.Now;
             _notesRepository.AddNote(note);
             return CreatedAtAction("Get", new { id = note.Id }, note);
         }

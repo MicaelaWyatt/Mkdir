@@ -10,7 +10,7 @@ export const ProductDetails = () => {
     const [product, setPost] = useState({});
     const { productId } = useParams();
 
-    const [notes, setNotes] = useState({});
+    const [notes, setNotes] = useState([]);
 
     const getAllNotes = () => {
         getNotesByProductId(productId).then(notes => setNotes(notes));
@@ -48,6 +48,7 @@ export const ProductDetails = () => {
                 </CardBody>
             </Card>
             <h2>Notes</h2>
+            <Link to={`/usersProducts/${productId}/createNote`} > Add Note </Link>
             <div>
                 <div>
                     {notes.map((note) => (
