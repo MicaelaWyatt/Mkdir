@@ -7,6 +7,7 @@ import ProductList from "./myMakeup/ProductList";
 import ProductForm from "./myMakeup/ProductForm";
 import { ProductDetails } from "./myMakeup/ProductDetails";
 import NoteForm from "./Notes/NoteForm";
+import EditProduct from "./myMakeup/ProductUpdate";
 
 
 export default function ApplicationViews({ isLoggedIn }) {
@@ -27,6 +28,10 @@ export default function ApplicationViews({ isLoggedIn }) {
                 </Route>
                 <Route path="/usersProducts/:productId(\d+)" exact>
                     <ProductDetails />
+                </Route>
+
+                <Route path="/usersProducts/:productId(\d+)/edit" exact>
+                    <EditProduct />
                 </Route>
 
                 <Route path="/usersProducts/:productId(\d+)/createNote" exact>

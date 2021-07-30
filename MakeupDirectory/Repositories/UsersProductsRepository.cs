@@ -191,6 +191,7 @@ namespace MakeupDirectory.Repositories
             }
         }
 
+
         public void AddProduct(UsersProducts product)
         {
             using (var conn = Connection)
@@ -254,9 +255,8 @@ namespace MakeupDirectory.Repositories
                                 Brand = @Brand,
                                 Image_link = @Image_link,
                                 ExperationDate = @ExperationDate,
-                                PeriodAfterOpening= @PeriodAfterOpening
+                                PeriodAfterOpening= @PeriodAfterOpening,
                                 CategoryId = @CategoryId
-                                NotesId = @NotesId
                                 WHERE Id = @id";
 
                     DbUtils.AddParameter(cmd, "@Name", product.Name);
@@ -265,8 +265,7 @@ namespace MakeupDirectory.Repositories
                     DbUtils.AddParameter(cmd, "@ExperationDate", product.ExperationDate);
                     DbUtils.AddParameter(cmd, "@PeriodAfterOpening", product.PeriodAfterOpening);
                     DbUtils.AddParameter(cmd, "@CategoryId", product.CategoryId);
-                    DbUtils.AddParameter(cmd, "@NotesId", product.NotesId);
-
+                    DbUtils.AddParameter(cmd, "@id", product.Id);
                     cmd.ExecuteNonQuery();
                 }
             }
