@@ -15,7 +15,6 @@ namespace MakeupDirectory.Models
         public DateTime ExperationDate { get; set; }
         public int PeriodAfterOpening { get; set; }
         public int CategoryId { get; set; }
-        public int NotesId { get; set; }
         public int UserProfileId { get; set; }
         public UserProfile UserProfile { get; set; }
         public Category Category { get; set; }

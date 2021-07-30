@@ -35,6 +35,17 @@ namespace MakeupDirectory.Controllers
             return Ok(product);
         }
 
+        [HttpGet("Getproduct/{id}")]
+        public IActionResult Getproduct(int id)
+        {
+            var product = _usersProductsRepository.GetProductWithId(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return Ok(product);
+        }
+
         [HttpPost]
         public IActionResult Post(UsersProducts product)
         {

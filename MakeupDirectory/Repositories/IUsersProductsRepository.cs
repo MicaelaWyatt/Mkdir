@@ -10,6 +10,7 @@ namespace MakeupDirectory.Repositories
         List<UsersProducts> GetAllProductsFromCurrentUser(string firebaseUserId);
         UserProfile GetByFirebaseUserId(string firebaseUserId);
         UsersProducts GetProductById(int Id);
+        UsersProducts GetProductWithId(int id);
         void UpdateProduct(UsersProducts product);
     }
 }

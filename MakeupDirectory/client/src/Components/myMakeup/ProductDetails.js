@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { Link } from "react-router-dom";
-import { getProductById } from '../../modules/productManager';
+import { getProductById, getProductByIdWithNotes } from '../../modules/productManager';
 import { Card, CardBody } from "reactstrap";
 import { deleteNote, getNotesByProductId } from '../../modules/notesManager';
 import { NoteCard } from "../Notes/NoteCard";
@@ -17,7 +17,7 @@ export const ProductDetails = () => {
     }
 
     const getProduct = () => {
-        getProductById(productId)
+        getProductByIdWithNotes(productId)
             .then(product => {
                 setPost(product)
             })
