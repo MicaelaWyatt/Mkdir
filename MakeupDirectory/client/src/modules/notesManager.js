@@ -6,6 +6,16 @@ export const getToken = () => firebase.auth().currentUser.getIdToken();
 
 export const getNotesByProductId = (id) => {
     return getToken().then((token) =>
+        fetch(`${baseUrl}/GetAllNotesFromProduct/${id}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(res => res.json()));
+}
+
+export const getNoteById = (id) => {
+    return getToken().then((token) =>
         fetch(`${baseUrl}/${id}`, {
             method: "GET",
             headers: {
@@ -36,14 +46,14 @@ export const deleteNote = (id) => {
         }));
 };
 
-export const updateNote = (id) => {
+export const updateNote = (note) => {
     return getToken().then((token) =>
-        fetch(`${baseUrl}/${id}`, {
+        fetch(`${baseUrl}/${note.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`
             },
-            body: JSON.stringify(id)
+            body: JSON.stringify(note)
         }));
 }

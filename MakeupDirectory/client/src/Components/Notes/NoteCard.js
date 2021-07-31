@@ -10,8 +10,8 @@ export const NoteCard = ({ note, deleteAndSetNotes }) => {
                 <h3>{note.content}</h3>
                 <br></br>
                 <button onClick={() => deleteAndSetNotes(note.id)}>Delete</button>
-                {/* <Link to={`/usersProducts/${product.id}`}><button>Details</button></Link>
-                <Link to={`/post/edit/${product.id}`}><button>Edit</button></Link> */}
+                {/* <Link to={`/usersProducts/${product.id}`}><button>Details</button></Link> */}
+                <Link to={`/usersProducts/${note.productId}/notes/${note.id}/edit`}><button>Edit</button></Link>
             </CardBody>
         </Card>
     )

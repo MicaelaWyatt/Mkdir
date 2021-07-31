@@ -1,75 +1,52 @@
-// import React, { useEffect, useState } from "react";
-// import { useHistory, useParams } from "react-router-dom";
-// import { editComment, getCommentById } from "../../modules/commentManager";
-// import { Form, FormGroup, Button, Container } from "reactstrap";
+import React, { useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
+import { Button, Form, FromGroup, Label, Input, FormText, FormGroup } from "reactstrap";
+import { getNoteById, updateNote } from "../../modules/notesManager";
 
-// const EditComment = () => {
-//     const [comment, setComment] = useState({});
-//     const { id } = useParams();
+const EditNote = () => {
+    const [note, setNote] = useState({});
+    const { noteId } = useParams();
 
-//     const history = useHistory();
+    const history = useHistory();
 
-//     const handleInputChange = (evt) => {
-//         const editedComment = { ...comment };
-//         let selectedValue = evt.target.value
-//         editedComment[evt.target.id] = selectedValue
-//         setComment(editedComment)
-//     };
+    const handleInputChange = (evt) => {
+        const editedNote = { ...note };
+        let selectedValue = evt.target.value
+        editedNote[evt.target.id] = selectedValue
+        setNote(editedNote)
+    };
 
-//     const handleSaveEvent = (evt) => {
-//         evt.preventDefault();
-//         if (comment.subject === "" || comment.content === "") {
-//             window.alert("Please fill in all fields")
-//         } else {
-//             editComment(comment)
-//                 .then(() => history.push(`/comment/${comment.postId}`));
-//         };
-//     };
+    const handleSaveEvent = (evt) => {
+        evt.preventDefault();
+        if (note.content === "") {
+            window.alert("Please fill in all fields")
+        } else {
+            updateNote(note)
+                .then(() => history.push(`/usersProducts/${note.productId}`));
+        };
+    };
 
-//     const handleCancelSave = (evt) => {
-//         evt.preventDefault();
-//         history.push(`/comment/${comment.postId}`);
-//     };
+    const handleCancelSave = (evt) => {
+        evt.preventDefault();
+        history.push(`/usersProducts/${note.productId}`);
+    };
+    // This uses the param a the the top of the page which also uses the param from the update funtion in the manager
+    useEffect(() => {
+        getNoteById(noteId).then(setNote)
+    }, [noteId]);
 
-//     useEffect(() => {
-//         getCommentById(id).then(setComment)
-//     }, [id]);
+    return (
+        <Form>
+            <FormGroup>
+                <Label for="content">Content</Label>
+                <Input type="text" id="content"
+                    value={note.content}
+                    onChange={handleInputChange} />
+            </FormGroup>
+            <Button className="btn btn-primary" onClick={handleSaveEvent}>Save</Button>
+            <Button onClick={handleCancelSave}>Cancel</Button>
+        </Form>
+    )
+};
 
-//     return (
-//         <Container className="justified-content-center">
-//             <Form>
-//                 <FormGroup>
-//                     <label>Subject</label>
-//                     <input type="text"
-//                         id="subject"
-//                         onChange={handleInputChange}
-//                         required
-//                         autoComplete="off"
-//                         className="form-control"
-//                         defaultValue={comment.subject} />
-//                 </FormGroup>
-//                 <FormGroup>
-//                     <label>Comment</label>
-//                     <input type="text"
-//                         id="content"
-//                         onChange={handleInputChange}
-//                         required
-//                         autoComplete="off"
-//                         className="form-control"
-//                         defaultValue={comment.content} />
-//                 </FormGroup>
-//             </Form>
-//             <Button className="article-btn"
-//                 onClick={handleSaveEvent}>
-//                 Save Comment
-//             </Button>
-//             <Button className="article-btn"
-//                 variant="warning"
-//                 onClick={handleCancelSave}>
-//                 Cancel
-//             </Button>
-//         </Container>
-//     )
-// };
-
-// export default EditComment;
+export default EditNote;

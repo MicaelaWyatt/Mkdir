@@ -31,7 +31,7 @@ namespace MakeupDirectory.Controllers
             return Ok(notes);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetAllNotesFromProduct/{id}")]
         public IActionResult Get(int id)
         {
             var notes = _notesRepository.GetAllNotesFromProduct(id);
@@ -40,6 +40,17 @@ namespace MakeupDirectory.Controllers
                 return NotFound();
             }
             return Ok(notes);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Getproduct(int id)
+        {
+            var note = _notesRepository.GetById(id);
+            if (note == null)
+            {
+                return NotFound();
+            }
+            return Ok(note);
         }
 
         [HttpPost]

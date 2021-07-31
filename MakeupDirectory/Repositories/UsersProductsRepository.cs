@@ -115,6 +115,45 @@ namespace MakeupDirectory.Repositories
             }
         }
 
+        public UsersProducts GetProductWithId(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    SELECT Id, [Name],
+                    Brand,Image_link,CreateDateTime,
+                    ExperationDate,PeriodAfterOpening,
+                    CategoryId,UserProfileId
+                    FROM UsersProducts
+                    WHERE Id = @id";
+                    DbUtils.AddParameter(cmd, "@id", id);
+                    var reader = cmd.ExecuteReader();
+
+                    UsersProducts product = null;
+                    if (reader.Read())
+                    {
+                        product = new UsersProducts()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            Name = DbUtils.GetString(reader, "Name"),
+                            Brand = DbUtils.GetString(reader, "Brand"),
+                            Image_link = DbUtils.GetString(reader, "Image_link"),
+                            CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
+                            ExperationDate = DbUtils.GetDateTime(reader, "ExperationDate"),
+                            PeriodAfterOpening = DbUtils.GetInt(reader, "PeriodAfterOpening"),
+                            CategoryId = DbUtils.GetInt(reader, "CategoryId"),
+                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
+                        };
+                    }
+                    reader.Close();
+                    return product;
+                }
+            }
+        }
+
         public UsersProducts GetProductById(int Id)
         {
             using (var conn = Connection)
