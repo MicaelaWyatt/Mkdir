@@ -4,9 +4,19 @@ import "firebase/auth";
 const baseUrl = '/api/UsersProducts'
 export const getToken = () => firebase.auth().currentUser.getIdToken();
 
-export const getProductById = (id) => {
+export const getProductByIdWithNotes = (id) => {
     return getToken().then((token) =>
         fetch(`${baseUrl}/${id}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(res => res.json()));
+}
+
+export const getProductById = (id) => {
+    return getToken().then((token) =>
+        fetch(`${baseUrl}/Getproduct/${id}`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`
@@ -49,14 +59,14 @@ export const deleteProduct = (id) => {
         }));
 };
 
-export const updateProduct = (id) => {
+export const updateProduct = (product) => {
     return getToken().then((token) =>
-        fetch(`${baseUrl}/${id}`, {
+        fetch(`${baseUrl}/${product.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`
             },
-            body: JSON.stringify(id)
+            body: JSON.stringify(product)
         }));
 }

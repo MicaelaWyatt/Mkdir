@@ -73,6 +73,44 @@ namespace MakeupDirectory.Repositories
                 }
             }
         }
+
+        public Notes GetById(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT 
+                        Id,Content,ProductId,CreateDateTime
+                        FROM Notes
+                        WHERE Id = @id
+                    ";
+
+                    DbUtils.AddParameter(cmd, "@Id", id);
+
+                    var reader = cmd.ExecuteReader();
+
+                    Notes note = null;
+                    if (reader.Read())
+                    {
+                        note = new Notes()
+                        {
+                            Id = id,
+                            Content = DbUtils.GetString(reader, "Content"),
+                            ProductId = DbUtils.GetInt(reader, "ProductId"),
+                            CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime")
+                        };
+                    }
+
+                    reader.Close();
+
+                    return note;
+                }
+            }
+        }
+
         public void AddNote(Notes note)
         {
             using (var conn = Connection)
