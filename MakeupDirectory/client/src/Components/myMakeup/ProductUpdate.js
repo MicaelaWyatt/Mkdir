@@ -8,9 +8,6 @@ const EditProduct = () => {
     const { productId } = useParams();
     const history = useHistory();
 
-    const getProductToEdit = () => {
-
-    }
 
     const handleInputChange = (evt) => {
         const editedProduct = { ...product };
