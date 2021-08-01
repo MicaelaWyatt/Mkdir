@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ProductSearchCard } from "./ProductSearchCard"
 import { ObjectFromAPI, searchForProduct } from "../../modules/apiManager";
 
-const ProductSearch2 = () => {
+const ProductSearch = () => {
     const [products, setProducts] = useState([]);
     const [search, setSearch] = useState([]);
     const getProducts = () => {
@@ -54,4 +54,4 @@ const ProductSearch2 = () => {
     );
 };
 
-export default ProductSearch2;
+export default ProductSearch;
