@@ -1,15 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { ProductSearchCard } from "./ProductSearchCard"
-import { getListOfProducts } from "../../modules/apiManager";
+import { ObjectFromAPI, loadEyeshadows } from "../../modules/apiManager";
 
-const ProductSearch1 = () => {
+const ProductSearch2 = () => {
     const [products, setProducts] = useState([]);
 
     const getProducts = () => {
-        return getListOfProducts().then(productsFromApi => setProducts(productsFromApi));
-    }
+        return ObjectFromAPI().then(Obj => setProducts(Obj))
 
-    console.log(getListOfProducts)
+    }
+    // jsonObj["values"].map(([html, text]) => (
+    //     <div>
+    //       <label htmlFor={html}>{text}</label>
+    //     </div>
+    //   ));
+    // return listOfProducts.then(products => setProducts(products));
+
+    // console.log(listOfProducts)
+
+    console.log(products)
 
 
     // const handleinput = (e) => {
@@ -20,7 +29,7 @@ const ProductSearch1 = () => {
     useEffect(() => {
         getProducts();
     }, []);
-
+    // http://localhost:3000/usersProducts/create/search2
 
     return (
         <>
@@ -29,14 +38,14 @@ const ProductSearch1 = () => {
             </div>
 
             <div className="container">
-                <div className="row justify-content-center">
+                {/* <div className="row justify-content-center">
                     {products.map((product) => (
                         <ProductSearchCard product={product} key={product.id} />
                     ))}
-                </div>
+                </div> */}
             </div>
         </>
     );
 };
 
-export default ProductSearch1;
+export default ProductSearch2;
