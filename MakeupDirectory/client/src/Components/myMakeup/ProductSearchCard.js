@@ -6,9 +6,9 @@ export const ProductSearchCard = ({ product }) => {
     return (
         <Card>
             <CardBody>
-                <h3>{product.name}</h3>
-                <div>{product.brand}</div>
-                <img src={product.image_link} alt="Product Image" width="250" height="200" ></img>
+                <h3>{product.displayName}</h3>
+                <div>{product.brandName}</div>
+                <img src={product.heroImage} alt="Product Image" width="150" height="100" ></img>
                 <br></br>
                 {/* <Link to={`/usersProducts/${product.id}`}><button>select</button></Link> */}
             </CardBody>

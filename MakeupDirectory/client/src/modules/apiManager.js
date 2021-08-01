@@ -8,18 +8,19 @@ export const getListOfProducts = () => {
 }
 
 export const ObjectFromAPI = () => {
-    return fetch("https://sephora.p.rapidapi.com/products/list?categoryId=cat150006&pageSize=60&currentPage=1", {
+    return fetch("https://sephora.p.rapidapi.com/products/list?categoryId=cat150006&pageSize=25&currentPage=1", {
         "method": "GET",
         "headers": {
             "x-rapidapi-key": "361ce85ba0msh0064549f99dac2dp10889ajsn58e351ccd3c9",
             "x-rapidapi-host": "sephora.p.rapidapi.com"
         }
     })
-        .then(function (response) {
+        .then((response) => {
             return response.json()
         })
         .then(function (response) {
             console.log(response)
+            return response.products
         })
         .catch(err => {
             console.error(err);

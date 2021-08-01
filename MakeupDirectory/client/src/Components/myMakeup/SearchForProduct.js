@@ -6,7 +6,10 @@ const ProductSearch2 = () => {
     const [products, setProducts] = useState([]);
 
     const getProducts = () => {
-        return ObjectFromAPI().then(Obj => setProducts(Obj))
+        return ObjectFromAPI().then(Obj => {
+            console.log(Obj)
+            setProducts(Obj)
+        })
 
     }
     // jsonObj["values"].map(([html, text]) => (
@@ -18,7 +21,7 @@ const ProductSearch2 = () => {
 
     // console.log(listOfProducts)
 
-    console.log(products)
+    console.log()
 
 
     // const handleinput = (e) => {
@@ -38,11 +41,11 @@ const ProductSearch2 = () => {
             </div>
 
             <div className="container">
-                {/* <div className="row justify-content-center">
-                    {products.map((product) => (
-                        <ProductSearchCard product={product} key={product.id} />
+                <div className="row justify-content-center">
+                    {products.map((product, index) => (
+                        <ProductSearchCard product={product} key={index} />
                     ))}
-                </div> */}
+                </div>
             </div>
         </>
     );
