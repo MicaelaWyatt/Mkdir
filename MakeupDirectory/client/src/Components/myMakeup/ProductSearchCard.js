@@ -10,7 +10,7 @@ export const ProductSearchCard = ({ product }) => {
                 <div>{product.brandName}</div>
                 <img src={product.heroImage} alt="Product Image" width="150" height="100" ></img>
                 <br></br>
-                {/* <Link to={`/usersProducts/${product.id}`}><button>select</button></Link> */}
+                <Link to={`/usersProducts/${product.id}`}><button>select</button></Link>
             </CardBody>
         </Card >
     )
