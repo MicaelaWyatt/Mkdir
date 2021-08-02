@@ -37,6 +37,19 @@ export const getAllProductsFromCurrentUser = () => {
 
 };
 
+export const getAllProductsFromUserByCategory = (id) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/MyProductsByCategory?id=${id}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+
+            }
+        }).then(resp => resp.json())
+    });
+
+};
+
 export const addProduct = (product) => {
     return getToken().then((token) =>
         fetch(baseUrl, {
