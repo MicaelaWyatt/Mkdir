@@ -108,5 +108,17 @@ namespace MakeupDirectory.Controllers
             return Ok(products);
         }
 
+        [HttpGet("MyProductsByCategory")]
+        public IActionResult GetAllProductsFromUserAndCategory(int id)
+        {
+            string CurrentUserProfileId = GetCurrentFirebaseUserProfileId();
+            var products = _usersProductsRepository.GetAllProductsByCategory(CurrentUserProfileId,id);
+            if (products == null)
+            {
+                return NotFound();
+            }
+            return Ok(products);
+        }
+
     }
 }
