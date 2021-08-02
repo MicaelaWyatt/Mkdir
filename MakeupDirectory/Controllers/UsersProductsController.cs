@@ -51,6 +51,8 @@ namespace MakeupDirectory.Controllers
         {
             product.CreateDateTime = DateTime.Now;
             product.ExperationDate = DateTime.Now;
+            
+                //dat.AddMonths(ctr).ToString("d")
             product.UserProfileId = GetCurrentUserProfile().Id;
             if (string.IsNullOrWhiteSpace(product.Image_link))
             {

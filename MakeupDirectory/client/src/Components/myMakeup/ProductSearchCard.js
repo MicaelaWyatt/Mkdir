@@ -15,9 +15,7 @@ export const ProductSearchCard = ({ product }) => {
                 <Link to={{
                     pathname: '/usersProducts/create/search/form',
                     state: {
-                        name: product.displayName,
-                        brand: product.brandName,
-                        image_link: product.heroImage
+                        productObj: product
                     }
                 }} ><button>select</button></Link>
             </CardBody>

@@ -45,6 +45,7 @@ const ProductSearch = () => {
 
             <div className="container">
                 <div className="row justify-content-center">
+
                     {products.map((product, index) => (
                         <ProductSearchCard product={product} key={index} />
                     ))}
