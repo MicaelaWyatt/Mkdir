@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Card, CardBody } from "reactstrap";
 
 export const ProductSearchCard = ({ product }) => {
+
+
     return (
         <Card>
             <CardBody>
@@ -10,7 +12,14 @@ export const ProductSearchCard = ({ product }) => {
                 <div>{product.brandName}</div>
                 <img src={product.heroImage} alt="Product Image" width="150" height="100" ></img>
                 <br></br>
-                <Link to={`/usersProducts/${product.id}`}><button>select</button></Link>
+                <Link to={{
+                    pathname: '/usersProducts/create/search/form',
+                    state: {
+                        name: product.displayName,
+                        brand: product.brandName,
+                        image_link: product.heroImage
+                    }
+                }} ><button>select</button></Link>
             </CardBody>
         </Card >
     )

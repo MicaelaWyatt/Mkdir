@@ -11,6 +11,7 @@ import EditProduct from "./myMakeup/ProductUpdate";
 import EditNote from "./Notes/NoteUpdate";
 import ProductSearch from "./myMakeup/SearchForProduct";
 import ProductAdd from "./myMakeup/ProductAdd";
+import ProductSearchForm from "./myMakeup/ProductSearchForm";
 
 
 export default function ApplicationViews({ isLoggedIn }) {
@@ -34,12 +35,16 @@ export default function ApplicationViews({ isLoggedIn }) {
                     <ProductForm />
                 </Route>
 
-                <Route path="/usersProducts/:productId(\d+)" exact>
-                    <ProductDetails />
-                </Route>
-
                 <Route path="/usersProducts/create/search" exact>
                     <ProductSearch />
+                </Route>
+
+                <Route path="/usersProducts/create/search/form" exact>
+                    <ProductSearchForm />
+                </Route>
+
+                <Route path="/usersProducts/:productId(\d+)" exact>
+                    <ProductDetails />
                 </Route>
 
                 <Route path="/usersProducts/:productId(\d+)/edit" exact>
