@@ -50,7 +50,6 @@ namespace MakeupDirectory.Controllers
         public IActionResult Post(UsersProducts product)
         {
             product.CreateDateTime = DateTime.Now;
-            product.ExperationDate = DateTime.Now;
             
                 //dat.AddMonths(ctr).ToString("d")
             product.UserProfileId = GetCurrentUserProfile().Id;

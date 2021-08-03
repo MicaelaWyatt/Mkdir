@@ -35,36 +35,34 @@ const ProductForm = () => {
     };
 
     const value = parseInt(product.periodAfterOpening);
-    const valueToAdd = value + 1;
+
 
     console.log(value)
-    console.log(valueToAdd)
 
-    const formatDate = (dateObject) => {
-        const parts = {
-            date: dateObject.getDate(),
-            month: dateObject.getMonth() + valueToAdd,
-            year: dateObject.getFullYear()
-        };
-        return `${parts.month}/${parts.date}/${parts.year}`
+
+
+    function dateWithMonthsDelay(months) {
+        const date = new Date()
+        date.setMonth(date.getMonth() + months)
+        console.log(date)
+        return date
+
     }
-    const myDate = new Date();
-    const experationDateFormatted = formatDate(myDate);
 
 
     const handleSave = (evt) => {
         evt.preventDefault();
 
-        const productFromFrom = {
+        const productFromForm = {
             name: product.name,
             brand: product.brand,
             Image_link: product.image_link,
             categoryId: product.categoryId,
-            experationDate: experationDateFormatted,
+            experationDate: dateWithMonthsDelay(value),
             periodAfterOpening: product.periodAfterOpening
         }
-        console.log(productFromFrom)
-        addProduct(productFromFrom).then(() => {
+        console.log(productFromForm)
+        addProduct(productFromForm).then(() => {
             history.push("/usersProducts/myproducts");
         });
     };

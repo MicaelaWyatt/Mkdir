@@ -384,13 +384,13 @@ namespace MakeupDirectory.Repositories
         }
 
 
-        public DateTime AddMonths(int months)
-        {
-            var dat = new DateTime(2015, 12, 31);
-            for (int ctr = 0; ctr <= 15; ctr++)
-                Console.WriteLine(dat.AddMonths(ctr).ToString("d"));
+        //public DateTime AddMonths(int months)
+        //{
+        //    var dat = DateTime.Now;
+        //    for (int ctr = 0; ctr <= 15; ctr++)
+        //        Console.WriteLine(dat.AddMonths(ctr).ToString("d"));
 
-        }
+        //}
 
 
     }

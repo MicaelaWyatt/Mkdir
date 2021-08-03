@@ -1,4 +1,5 @@
 ﻿using MakeupDirectory.Models;
+using System;
 using System.Collections.Generic;
 
 namespace MakeupDirectory.Repositories
@@ -13,5 +14,6 @@ namespace MakeupDirectory.Repositories
         UsersProducts GetProductById(int Id);
         UsersProducts GetProductWithId(int id);
         void UpdateProduct(UsersProducts product);
+        //public DateTime AddMonths(int months);
     }
 }

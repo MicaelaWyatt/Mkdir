@@ -27,6 +27,21 @@ const ProductSearchForm = () => {
         setProduct(productCopy);
     };
 
+    const value = parseInt(product.periodAfterOpening);
+
+
+    console.log(value)
+
+
+
+    function dateWithMonthsDelay(months) {
+        const date = new Date()
+        date.setMonth(date.getMonth() + months)
+        console.log(date)
+        return date
+
+    }
+
     const handleSave = (evt) => {
         evt.preventDefault();
         const productFromSearch = {
@@ -34,6 +49,7 @@ const ProductSearchForm = () => {
             brand: productObj.brandName,
             Image_link: productObj.heroImage,
             categoryId: product.categoryId,
+            experationDate: dateWithMonthsDelay(value),
             periodAfterOpening: product.periodAfterOpening
         }
         console.log(productFromSearch)
