@@ -4,7 +4,14 @@ import { Button, Form, FromGroup, Label, Input, FormText, FormGroup } from "reac
 import { addProduct, getAllProductsFromCurrentUser } from "../../modules/productManager";
 
 const ProductForm = () => {
-    const [product, setProduct] = useState([]);
+    const [product, setProduct] = useState({
+        name: "",
+        brand: "",
+        Image_link: "",
+        categoryId: "",
+        experationDate: "",
+        periodAfterOpening: ""
+    });
     const [products, setProducts] = useState([]);
     const history = useHistory();
 
@@ -23,14 +30,41 @@ const ProductForm = () => {
         const key = evt.target.id;
 
         const productCopy = { ...product };
-
         productCopy[key] = value;
         setProduct(productCopy);
     };
 
+    const value = parseInt(product.periodAfterOpening);
+    const valueToAdd = value + 1;
+
+    console.log(value)
+    console.log(valueToAdd)
+
+    const formatDate = (dateObject) => {
+        const parts = {
+            date: dateObject.getDate(),
+            month: dateObject.getMonth() + valueToAdd,
+            year: dateObject.getFullYear()
+        };
+        return `${parts.month}/${parts.date}/${parts.year}`
+    }
+    const myDate = new Date();
+    const experationDateFormatted = formatDate(myDate);
+
+
     const handleSave = (evt) => {
         evt.preventDefault();
-        addProduct(product).then(() => {
+
+        const productFromFrom = {
+            name: product.name,
+            brand: product.brand,
+            Image_link: product.image_link,
+            categoryId: product.categoryId,
+            experationDate: experationDateFormatted,
+            periodAfterOpening: product.periodAfterOpening
+        }
+        console.log(productFromFrom)
+        addProduct(productFromFrom).then(() => {
             history.push("/usersProducts/myproducts");
         });
     };
