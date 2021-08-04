@@ -1,14 +1,12 @@
-const ApiKey = {
-    apiKey: process.env.REACT_APP_EXTERNAL_API_KEY,
-};
-console.log(ApiKey)
+const ApiKey = process.env.REACT_APP_SEPHORA_API_KEY;
+
 
 
 export const ObjectFromAPI = () => {
     return fetch("https://sephora.p.rapidapi.com/products/list?categoryId=cat150006&pageSize=15&currentPage=1", {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": ApiKey,
+            "x-rapidapi-key": `${ApiKey}`,
             "x-rapidapi-host": "sephora.p.rapidapi.com"
         }
     })
@@ -28,7 +26,7 @@ export const searchForProduct = (search) => {
     return fetch(`https://sephora.p.rapidapi.com/products/search?q=${search}&pageSize=60&currentPage=1`, {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": ApiKey,
+            "x-rapidapi-key": `${ApiKey}`,
             "x-rapidapi-host": "sephora.p.rapidapi.com"
         }
     })
