@@ -9,8 +9,9 @@ import { ProductDetails } from "./myMakeup/ProductDetails";
 import NoteForm from "./Notes/NoteForm";
 import EditProduct from "./myMakeup/ProductUpdate";
 import EditNote from "./Notes/NoteUpdate";
-import ProductSearch1 from "./myMakeup/SearchProducts";
-import ProductSearch2 from "./myMakeup/SearchForProduct";
+import ProductSearch from "./myMakeup/SearchForProduct";
+import ProductAdd from "./myMakeup/ProductAdd";
+import ProductSearchForm from "./myMakeup/ProductSearchForm";
 
 
 export default function ApplicationViews({ isLoggedIn }) {
@@ -27,19 +28,23 @@ export default function ApplicationViews({ isLoggedIn }) {
                 </Route>
 
                 <Route path="/usersProducts/create" exact>
+                    <ProductAdd />
+                </Route>
+
+                <Route path="/usersProducts/create/manual" exact>
                     <ProductForm />
+                </Route>
+
+                <Route path="/usersProducts/create/search" exact>
+                    <ProductSearch />
+                </Route>
+
+                <Route path="/usersProducts/create/search/form" exact>
+                    <ProductSearchForm />
                 </Route>
 
                 <Route path="/usersProducts/:productId(\d+)" exact>
                     <ProductDetails />
-                </Route>
-
-                <Route path="/usersProducts/create/search1" exact>
-                    <ProductSearch1 />
-                </Route>
-
-                <Route path="/usersProducts/create/search2" exact>
-                    <ProductSearch2 />
                 </Route>
 
                 <Route path="/usersProducts/:productId(\d+)/edit" exact>
