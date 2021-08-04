@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ProductSearchCard } from "./ProductSearchCard"
 import { ObjectFromAPI, searchForProduct } from "../../modules/apiManager";
 
-const ProductSearch = () => {
+const ProductSearch2 = () => {
     const [products, setProducts] = useState([]);
     const [search, setSearch] = useState([]);
     const getProducts = () => {
@@ -45,7 +45,6 @@ const ProductSearch = () => {
 
             <div className="container">
                 <div className="row justify-content-center">
-
                     {products.map((product, index) => (
                         <ProductSearchCard product={product} key={index} />
                     ))}
@@ -55,4 +54,4 @@ const ProductSearch = () => {
     );
 };
 
-export default ProductSearch;
+export default ProductSearch2;

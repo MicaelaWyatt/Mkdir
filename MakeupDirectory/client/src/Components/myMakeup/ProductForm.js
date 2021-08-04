@@ -31,7 +31,7 @@ const ProductForm = () => {
     const handleSave = (evt) => {
         evt.preventDefault();
         addProduct(product).then(() => {
-            history.push("/usersProducts/myproducts");
+            history.push("/myproducts");
         });
     };
 
@@ -59,7 +59,6 @@ const ProductForm = () => {
                             <option value="2">Blush/Bronzer</option>
                             <option value="3">Lips</option>
                             <option value="4">Eyes</option>
-                            <option value="5">Skin Care</option>
                         </select>
                     </FormGroup>
                     <FormGroup>
