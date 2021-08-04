@@ -3,6 +3,7 @@ using MakeupDirectory.Models;
 using MakeupDirectory.Utils;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace MakeupDirectory.Repositories
 {
@@ -66,6 +67,7 @@ namespace MakeupDirectory.Repositories
                     LEFT JOIN UserProfile u ON up.UserProfileId = u.Id
                     LEFT JOIN Notes n ON up.Id = n.ProductId
                     WHERE u.FirebaseUserId = @firebaseUserId
+                    ORDER BY up.ExperationDate ASC;
                     ";
 
                     DbUtils.AddParameter(cmd,"@firebaseUserId", firebaseUserId);
@@ -137,6 +139,7 @@ namespace MakeupDirectory.Repositories
                     LEFT JOIN UserProfile u ON up.UserProfileId = u.Id
                     LEFT JOIN Notes n ON up.Id = n.ProductId
                     WHERE u.FirebaseUserId = @firebaseUserId AND up.CategoryId = @id
+                    ORDER BY up.ExperationDate ASC;
                     ";
 
                     DbUtils.AddParameter(cmd, "@firebaseUserId", firebaseUserId);
@@ -340,6 +343,8 @@ namespace MakeupDirectory.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
+                    DELETE FROM Notes
+                    WHERE ProductId = @id
                     DELETE FROM UsersProducts
                     WHERE Id = @id";
 
@@ -381,6 +386,16 @@ namespace MakeupDirectory.Repositories
                 }
             }
         }
+
+
+        //public DateTime AddMonths(int months)
+        //{
+        //    var dat = DateTime.Now;
+        //    for (int ctr = 0; ctr <= 15; ctr++)
+        //        Console.WriteLine(dat.AddMonths(ctr).ToString("d"));
+
+        //}
+
 
     }
 }

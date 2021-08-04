@@ -9,6 +9,6 @@ export default function Hello() {
             top: "50%",
             marginTop: "-0.5rem",
             textAlign: "center",
-        }}>hello</span>
+        }}>hello Wellcome to your Makeup Directory.Here you will be able to keep track of all you beauty and skincare products</span>
     );
 }

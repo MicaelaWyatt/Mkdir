@@ -4,7 +4,14 @@ import { Button, Form, FromGroup, Label, Input, FormText, FormGroup } from "reac
 import { addProduct, getAllProductsFromCurrentUser } from "../../modules/productManager";
 
 const ProductForm = () => {
-    const [product, setProduct] = useState([]);
+    const [product, setProduct] = useState({
+        name: "",
+        brand: "",
+        Image_link: "",
+        categoryId: "",
+        experationDate: "",
+        periodAfterOpening: ""
+    });
     const [products, setProducts] = useState([]);
     const history = useHistory();
 
@@ -23,14 +30,39 @@ const ProductForm = () => {
         const key = evt.target.id;
 
         const productCopy = { ...product };
-
         productCopy[key] = value;
         setProduct(productCopy);
     };
 
+    const value = parseInt(product.periodAfterOpening);
+
+
+    console.log(value)
+
+
+
+    function dateWithMonthsDelay(months) {
+        const date = new Date()
+        date.setMonth(date.getMonth() + months)
+        console.log(date)
+        return date
+
+    }
+
+
     const handleSave = (evt) => {
         evt.preventDefault();
-        addProduct(product).then(() => {
+
+        const productFromForm = {
+            name: product.name,
+            brand: product.brand,
+            Image_link: product.image_link,
+            categoryId: product.categoryId,
+            experationDate: dateWithMonthsDelay(value),
+            periodAfterOpening: product.periodAfterOpening
+        }
+        console.log(productFromForm)
+        addProduct(productFromForm).then(() => {
             history.push("/usersProducts/myproducts");
         });
     };
