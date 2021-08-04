@@ -67,6 +67,7 @@ namespace MakeupDirectory.Repositories
                     LEFT JOIN UserProfile u ON up.UserProfileId = u.Id
                     LEFT JOIN Notes n ON up.Id = n.ProductId
                     WHERE u.FirebaseUserId = @firebaseUserId
+                    ORDER BY up.ExperationDate ASC;
                     ";
 
                     DbUtils.AddParameter(cmd,"@firebaseUserId", firebaseUserId);
@@ -138,6 +139,7 @@ namespace MakeupDirectory.Repositories
                     LEFT JOIN UserProfile u ON up.UserProfileId = u.Id
                     LEFT JOIN Notes n ON up.Id = n.ProductId
                     WHERE u.FirebaseUserId = @firebaseUserId AND up.CategoryId = @id
+                    ORDER BY up.ExperationDate ASC;
                     ";
 
                     DbUtils.AddParameter(cmd, "@firebaseUserId", firebaseUserId);
@@ -341,6 +343,8 @@ namespace MakeupDirectory.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
+                    DELETE FROM Notes
+                    WHERE ProductId = @id
                     DELETE FROM UsersProducts
                     WHERE Id = @id";
 

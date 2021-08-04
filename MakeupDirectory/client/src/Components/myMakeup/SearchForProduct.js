@@ -3,6 +3,8 @@ import { ProductSearchCard } from "./ProductSearchCard"
 import { ObjectFromAPI, searchForProduct } from "../../modules/apiManager";
 import { useHistory } from "react-router-dom";
 
+
+
 const ProductSearch = () => {
     const [products, setProducts] = useState([]);
     const [search, setSearch] = useState([]);
@@ -46,6 +48,7 @@ const ProductSearch = () => {
             <div>
                 <input id="searchparam" type="text" placeholder="search for product" onChange={handleinput}></input><button onClick={searchProducts}  >Search</button>
             </div>
+            <a href="http://localhost:3000/usersProducts/create/manual">cant find the product you were looking for?</a>
 
             <div className="container">
                 {/* {productCheck()} */}
