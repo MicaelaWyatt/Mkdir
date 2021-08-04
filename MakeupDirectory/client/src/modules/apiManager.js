@@ -32,7 +32,7 @@ export const searchForProduct = (search) => {
             return response.json()
         })
         .then(function (response) {
-            // console.log(response)
+            console.log(response)
             return response.products
         })
         .catch(err => {
