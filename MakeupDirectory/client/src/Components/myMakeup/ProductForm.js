@@ -37,8 +37,6 @@ const ProductForm = () => {
     const value = parseInt(product.periodAfterOpening);
 
 
-    console.log(value)
-
 
 
     function dateWithMonthsDelay(months) {

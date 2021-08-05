@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ProductSearchCard } from "./ProductSearchCard"
 import { ObjectFromAPI, searchForProduct } from "../../modules/apiManager";
 import { useHistory } from "react-router-dom";
+import './Search.css';
 
 
 

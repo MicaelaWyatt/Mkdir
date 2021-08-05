@@ -12,7 +12,7 @@ import EditNote from "./Notes/NoteUpdate";
 import ProductSearch from "./myMakeup/SearchForProduct";
 import ProductAdd from "./myMakeup/ProductAdd";
 import ProductSearchForm from "./myMakeup/ProductSearchForm";
-
+import './ApplicationViews.css';
 
 export default function ApplicationViews({ isLoggedIn }) {
 

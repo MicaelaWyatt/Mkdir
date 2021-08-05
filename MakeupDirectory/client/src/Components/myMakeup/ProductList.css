@@ -1,0 +1,46 @@
+div#product-list{
+    width: 1200px;
+    margin: auto;
+}
+
+button#add-product-button{
+    display: flex;
+    float: right;
+    margin-right: 55px;
+}
+
+div.list-options{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+div.card{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+img.card-image{
+    display: flex;
+    float: right;
+    margin: auto;
+}
+
+/* div.1.card{
+    background-color: #7BC591!important;
+}
+
+div.\2.card-body{
+    background-color: #221C6E!important;
+}
+
+div#3.card-body{
+    background-color: #1F91A3!important;
+}
+
+div#4.card-body{
+    background-color: #A4DBF5!important;
+}
+
+div#5.card-body{
+    background-color: #FFD85C!important;
+} */

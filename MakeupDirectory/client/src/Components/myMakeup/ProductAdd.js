@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Card, CardBody } from "reactstrap";
+import './Search.css';
 
 export const ProductAdd = () => {
     const history = useHistory();
@@ -19,8 +20,10 @@ export const ProductAdd = () => {
 
     return (
         <>
-            <h2>New Product</h2>
-            <div> <button onClick={handleSearch} >Search for product</button> <h6>or</h6> <button onClick={handleManual}  >Enter Manually</button></div>
+            <div className="Add-page" >
+                <h2>New Product</h2>
+                <div className="options"> <button className="search" onClick={handleSearch} >Search for product</button> <h6>or</h6> <button className="enter" onClick={handleManual}  >Enter Manually</button></div>
+            </div>
         </>
     )
 };

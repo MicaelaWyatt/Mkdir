@@ -1,0 +1,20 @@
+div.Add-page{
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 40%;
+    margin-top: -0.5rem;
+    text-align: center; 
+
+    padding-top: 200px;
+    padding-bottom: 339px;
+}
+
+button.search{
+background-color: #1F91A3;
+padding: 7px 5px 7px 5px;
+}
+
+button.enter{
+background-color: #1F91A3;
+}

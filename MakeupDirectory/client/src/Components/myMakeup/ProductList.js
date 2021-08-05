@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { ProductCard } from "./ProductCard";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { deleteProduct, getAllProductsFromCurrentUser, getAllProductsFromUserByCategory } from "../../modules/productManager";
+import './ProductList.css';
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
-
+    const history = useHistory();
     const getProducts = () => {
         getAllProductsFromCurrentUser().then(products => setProducts(products));
     }
@@ -24,6 +25,11 @@ const ProductList = () => {
             getAllProductsFromUserByCategory(value).then(products => setProducts(products))
         }
     }
+    const handleAddProduct = (evt) => {
+        evt.preventDefault();
+        history.push("/usersProducts/create");
+
+    };
 
     useEffect(() => {
         getProducts();
@@ -31,8 +37,8 @@ const ProductList = () => {
     // add link to when you have created add form 
     return (
         <>
-            <Link to="/usersProducts/create" > Add Product </Link>
-            <div>
+            <div class="list-options" >
+                <p>Filter</p>
                 <select onChange={handleInputChange} type="select" name="select" id="categoryId" >
                     <option value="0" >My Products</option>
                     <option value="1">Foundation</option>
@@ -41,7 +47,10 @@ const ProductList = () => {
                     <option value="4">Eyes</option>
                     <option value="5">Skin Care</option>
                 </select>
-                <div>
+                <button id="add-product-button" onClick={handleAddProduct} >Add product</button>
+            </div>
+            <div id="product-list">
+                <div >
                     {products.map((product) => (
                         <ProductCard product={product} key={product.id} deleteAndSetProducts={deleteAndSetProducts} />
                     ))}

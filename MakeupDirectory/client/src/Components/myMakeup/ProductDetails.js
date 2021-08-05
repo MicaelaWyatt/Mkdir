@@ -28,10 +28,14 @@ export const ProductDetails = () => {
 
     }
 
+
     useEffect(() => {
         getProduct();
         getAllNotes();
     }, [])
+
+    const date = new Date(product.experationDate);
+    const createDateTime = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
 
     return (
         <>
@@ -41,7 +45,7 @@ export const ProductDetails = () => {
                     <h3>{product.name}</h3>
                     <div>{product.brand}</div>
                     <img src={product.image_link} alt="Product Image" width="150" height="100" ></img>
-                    <div> EXPIRES ON {product.experationDate}</div>
+                    <div> EXPIRES ON {createDateTime}</div>
                     <br></br>
                     {/* <button onClick={() => deleteAndSetProducts(product.id)}>Delete</button> */}
                     <Link to={`/usersProducts/${productId}/edit`}><button>Edit</button></Link>

@@ -17,7 +17,7 @@ export default function Header({ isLoggedIn }) {
 
     return (
         <div>
-            <Navbar color="light" light expand="md">
+            <Navbar style={{ backgroundColor: '#FFC7C7' }} light expand="md">
                 <NavbarBrand tag={RRNavLink} to="/">MKDIR</NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>

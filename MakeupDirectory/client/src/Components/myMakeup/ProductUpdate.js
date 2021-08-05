@@ -13,8 +13,20 @@ const EditProduct = () => {
         const editedProduct = { ...product };
         let selectedValue = evt.target.value
         editedProduct[evt.target.id] = selectedValue
+
         setProduct(editedProduct);
     };
+
+
+    const handleCancelSave = (evt) => {
+        evt.preventDefault();
+        history.push(`/usersProducts/${productId}`);
+    };
+
+    useEffect(() => {
+        getProductById(productId).then(setProduct)
+    }, [productId])
+
 
     const handleSaveEvent = (evt) => {
         evt.preventDefault();
@@ -27,14 +39,6 @@ const EditProduct = () => {
         };
     };
 
-    const handleCancelSave = (evt) => {
-        evt.preventDefault();
-        history.push(`/usersProducts/${productId}`);
-    };
-
-    useEffect(() => {
-        getProductById(productId).then(setProduct)
-    }, [productId])
 
     return (
         <>
