@@ -53,7 +53,6 @@ const ProductSearch = () => {
             </div>
 
             <div className="container">
-                {/* {productCheck()} */}
                 <div className="row justify-content-center">
                     {!products ?
                         <>

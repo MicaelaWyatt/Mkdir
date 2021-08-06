@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory, useParams } from "react-router";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { addNote } from '../../modules/notesManager';
+import './Notes.css';
 
 export const NoteForm = () => {
     const { productId } = useParams();
@@ -27,14 +28,14 @@ export const NoteForm = () => {
     };
 
     return (
-        <Form>
+        <Form className="note-form">
             <FormGroup>
-                <Label for="content">Content</Label>
-                <Input type="text" id="content" placeholder="Comment Content"
+                <h2 className="form-header"> New Note</h2>
+                <Input className="input" type="text" id="content" placeholder="Content"
                     value={note.content}
                     onChange={handleInputChange} />
             </FormGroup>
-            <Button className="btn btn-primary" onClick={handleClickSaveNote}>Submit</Button>
+            <button className="save" onClick={handleClickSaveNote}>Submit</button>
         </Form>
     );
 };

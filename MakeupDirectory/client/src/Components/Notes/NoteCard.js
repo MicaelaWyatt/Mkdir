@@ -2,10 +2,12 @@ import React from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { Card, CardBody } from "reactstrap";
+import './Notes.css';
+
 
 export const NoteCard = ({ note, deleteAndSetNotes }) => {
     return (
-        <Card>
+        <Card className="note-card">
             <CardBody>
                 <h3>{note.content}</h3>
                 <br></br>
