@@ -86,7 +86,7 @@ const ProductSearchForm = () => {
                             </select>
                         </FormGroup>
                         <FormGroup className="PAO">
-                            <Label className="descriptor">Period After Opening</Label>
+                            <Label className="descriptor">Period After Opening</Label><img src="http://www.paosymbol.com/assets/pao-db0bb06b97a84fe5be6986acc45f99452925410732f7fee87f8108d9f810c64c.svg" alt="Period After Opening" width="30px" height="30px"></img>
                             <br></br>
                             <input id="periodAfterOpening" type="text" value={product.periodAfterOpening} onChange={handleInputChange}></input>
                         </FormGroup>
