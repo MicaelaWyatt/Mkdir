@@ -5,6 +5,7 @@ Form.note-form{
     margin: 0 auto;
     margin-top: 75px;
     border-radius: 2rem;
+    padding-top: 1px
 }
 
 div.note-card{
@@ -15,3 +16,4 @@ div.note-card{
     border-radius: 20px;
 
 }
+

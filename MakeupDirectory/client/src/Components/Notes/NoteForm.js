@@ -28,15 +28,17 @@ export const NoteForm = () => {
     };
 
     return (
-        <Form className="note-form">
-            <FormGroup>
-                <h2 className="form-header"> New Note</h2>
-                <Input className="input" type="text" id="content" placeholder="Content"
-                    value={note.content}
-                    onChange={handleInputChange} />
-            </FormGroup>
-            <button className="save" onClick={handleClickSaveNote}>Submit</button>
-        </Form>
+        <div className="form">
+            <Form className="note-form">
+                <FormGroup>
+                    <h2 className="form-header"> New Note</h2>
+                    <Input className="input" type="text" id="content" placeholder="Content"
+                        value={note.content}
+                        onChange={handleInputChange} />
+                </FormGroup>
+                <button className="save" onClick={handleClickSaveNote}>Submit</button>
+            </Form>
+        </div>
     );
 };
 

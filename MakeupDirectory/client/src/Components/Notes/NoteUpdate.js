@@ -36,16 +36,18 @@ const EditNote = () => {
     }, [noteId]);
 
     return (
-        <Form>
-            <FormGroup>
-                <Label for="content">Content</Label>
-                <Input type="text" id="content"
-                    value={note.content}
-                    onChange={handleInputChange} />
-            </FormGroup>
-            <Button className="btn btn-primary" onClick={handleSaveEvent}>Save</Button>
-            <Button onClick={handleCancelSave}>Cancel</Button>
-        </Form>
+        <div className="form">
+            <Form className="note-form">
+                <FormGroup>
+                    <h2 className="form-header" for="content">Content</h2>
+                    <Input className="input" type="text" id="content"
+                        value={note.content}
+                        onChange={handleInputChange} />
+                </FormGroup>
+                <button id="update-note" className="save" onClick={handleSaveEvent}>Save</button>
+                <button className="cancel" onClick={handleCancelSave}>Cancel</button>
+            </Form>
+        </div>
     )
 };
 
