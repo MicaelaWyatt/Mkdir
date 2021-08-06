@@ -1,5 +1,5 @@
 main#no-cover {
-    background-image: url('../Images/background.png');
+    background-image: url('../Images/Background.png');
     background-repeat: no-repeat;
     background-attachment: fixed!important;
     background-size: cover!important;
@@ -9,7 +9,7 @@ main#no-cover {
   }
 
   main#search-view{
-    background-image: url('../Images/background.png');
+    background-image: url('../Images/Background.png');
     background-repeat: no-repeat;
   background-attachment: fixed!important;
   background-size: cover!important;

@@ -95,7 +95,7 @@ const ProductForm = () => {
                             </select>
                         </FormGroup>
                         <FormGroup className="PAO">
-                            <Label className="descriptor">Period After Opening</Label>
+                            <Label className="descriptor">Period After Opening</Label><img src='../Images/pao.jpg'></img>
                             <br></br>
                             <input id="periodAfterOpening" type="text" value={product.periodAfterOpening} onChange={handleInputChange}></input>
                         </FormGroup>

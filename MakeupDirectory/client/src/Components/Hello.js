@@ -14,27 +14,30 @@ export default function Hello() {
         <>
             <div className="home">
                 <div className="headers">
-                    <h1>MAKEUP DIRECTORY</h1>
+                    <h1 className="main-header">MAKEUP DIRECTORY</h1>
                     <h4>No one wants to be using crusty old makeup on their beautiful face</h4>
                     <h4>But who can remember when to throw away their old products</h4>
                     <h4>Well we have made it easy for you</h4>
                 </div>
                 <div className="home-cards">
                     <div className="home-card">
-                        <h5>Step 1 </h5>
+                        <h5>Add Products </h5>
                         <p>head over to the "My Makeup" tab,</p>
                         <p>here you will be able see a list of all your makeup products</p>
+                        <p>Click the add product button, you will then be promted to,</p>
+                        <p>search for a product or enter a product</p>
                     </div>
                     <div className="home-card">
-                        <h5>Step 2 </h5>
-                        <p>Click the "Add Product" button to add new makeup to your list</p>
-                        <p>you can then select to search for a product or enter a product manualy</p>
-                        <p>Once you save a product it will be added to your list</p>
+                        <h5>View Products </h5>
+                        <p>Once you have sucessfully added a product it will display on</p>
+                        <p>your makeup list.</p>
+                        <p>Your list will be ordered with soonest to expire displaying at the top </p>
                     </div>
                     <div className="home-card">
-                        <h5>Products</h5>
+                        <h5>Filter Products</h5>
                         <p>When you are viewing your list of makeup products you will be able </p>
                         <p>to filter the products based on category</p>
+                        <p>Your products are also colored based on category</p>
                     </div>
                 </div>
             </div>

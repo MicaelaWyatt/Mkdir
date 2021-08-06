@@ -1,0 +1,17 @@
+Form.note-form{
+    width: 55%;
+    height: 300px;
+    background-color: #ebcfbf;
+    margin: 0 auto;
+    margin-top: 75px;
+    border-radius: 2rem;
+}
+
+div.note-card{
+    width: 1200px;
+    margin: auto;
+    background-color: #fee8da;
+    border: 3px solid #c17e79;
+    border-radius: 20px;
+
+}
