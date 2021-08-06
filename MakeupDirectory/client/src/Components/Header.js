@@ -11,13 +11,15 @@ import {
 } from 'reactstrap';
 import { logout } from '../modules/authManager';
 
+
+
 export default function Header({ isLoggedIn }) {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
 
     return (
         <div>
-            <Navbar color="light" light expand="md">
+            <Navbar style={{ backgroundColor: '#ebcfbf' }} light expand="md">
                 <NavbarBrand tag={RRNavLink} to="/">MKDIR</NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
@@ -42,7 +44,7 @@ export default function Header({ isLoggedIn }) {
                             <>
                                 <NavItem>
                                     <a aria-current="page" className="nav-link"
-                                        style={{ cursor: "pointer" }} onClick={logout}>Logout</a>
+                                        style={{ cursor: "pointer" }} onClick={logout} >Logout</a>
                                 </NavItem>
                             </>
                         }

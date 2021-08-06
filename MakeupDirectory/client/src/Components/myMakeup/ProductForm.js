@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Button, Form, FromGroup, Label, Input, FormText, FormGroup } from "reactstrap";
 import { addProduct, getAllProductsFromCurrentUser } from "../../modules/productManager";
+import './Form.css';
 
 const ProductForm = () => {
     const [product, setProduct] = useState({
@@ -37,8 +38,6 @@ const ProductForm = () => {
     const value = parseInt(product.periodAfterOpening);
 
 
-    console.log(value)
-
 
 
     function dateWithMonthsDelay(months) {
@@ -70,38 +69,40 @@ const ProductForm = () => {
 
     return (
         <>
-            <Form>
-                <FormGroup>
-                    <Label>Product</Label>
+            <div className="form">
+                <Form>
                     <FormGroup>
-                        <Input id="name" type="text" placeholder="Name of Product" value={product.name} onChange={handleInputChange}></Input>
-                    </FormGroup>
-                    <FormGroup>
-                        <Input id="brand" type="text" placeholder="Name of Brand" value={product.brand} onChange={handleInputChange}></Input>
-                    </FormGroup>
-                    <FormGroup>
-                        <Input id="image_link" type="text" placeholder="image Url (optional)" value={product.image_link} onChange={handleInputChange}></Input>
-                    </FormGroup>
+                        <h2 className="form-header"> New Product</h2>
+                        <FormGroup>
+                            <Input className="input" id="name" type="text" placeholder="Name of Product" value={product.name} onChange={handleInputChange}></Input>
+                        </FormGroup>
+                        <FormGroup>
+                            <Input className="input" id="brand" type="text" placeholder="Name of Brand" value={product.brand} onChange={handleInputChange}></Input>
+                        </FormGroup>
+                        <FormGroup>
+                            <Input className="input" id="image_link" type="text" placeholder="image Url (optional)" value={product.image_link} onChange={handleInputChange}></Input>
+                        </FormGroup>
 
-                    <FormGroup>
-                        <Label for="categoryId">Category</Label >
-                        <select type="select" name="select" id="categoryId" value={product.categoryId} onChange={handleInputChange}>
-                            <option >Categories</option>
-                            <option value="1">Foundation</option>
-                            <option value="2">Blush/Bronzer</option>
-                            <option value="3">Lips</option>
-                            <option value="4">Eyes</option>
-                            <option value="5">Skin Care</option>
-                        </select>
+                        <FormGroup className="category-select">
+                            <Label className="descriptor" for="categoryId">Category</Label >
+                            <select type="select" name="select" id="categoryId" value={product.categoryId} onChange={handleInputChange}>
+                                <option >Categories</option>
+                                <option value="1">Foundation</option>
+                                <option value="2">Blush/Bronzer</option>
+                                <option value="3">Lips</option>
+                                <option value="4">Eyes</option>
+                                <option value="5">Skin Care</option>
+                            </select>
+                        </FormGroup>
+                        <FormGroup className="PAO">
+                            <Label className="descriptor">Period After Opening</Label>
+                            <br></br>
+                            <input id="periodAfterOpening" type="text" value={product.periodAfterOpening} onChange={handleInputChange}></input>
+                        </FormGroup>
                     </FormGroup>
-                    <FormGroup>
-                        <Label>Period After Opening</Label>
-                        <br></br>
-                        <input id="periodAfterOpening" type="text" value={product.periodAfterOpening} onChange={handleInputChange}></input>
-                    </FormGroup>
-                </FormGroup>
-                <Button onClick={handleSave}>Submit</Button>
-            </Form>
+                    <button className="save" onClick={handleSave}>Submit</button>
+                </Form>
+            </div>
         </>
     );
 };

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ProductSearchCard } from "./ProductSearchCard"
 import { ObjectFromAPI, searchForProduct } from "../../modules/apiManager";
 import { useHistory } from "react-router-dom";
+import './Search.css';
 
 
 
@@ -45,19 +46,23 @@ const ProductSearch = () => {
 
     return (
         <>
-            <div>
+            <h1 className="api-search-header">Search for product</h1>
+            <a className="no-product" href="http://localhost:3000/usersProducts/create/manual">cant find the product you were looking for?</a>
+            <div className="search-div">
                 <input id="searchparam" type="text" placeholder="search for product" onChange={handleinput}></input><button onClick={searchProducts}  >Search</button>
             </div>
-            <a href="http://localhost:3000/usersProducts/create/manual">cant find the product you were looking for?</a>
 
             <div className="container">
                 {/* {productCheck()} */}
                 <div className="row justify-content-center">
                     {!products ?
                         <>
-                            <h3>We're sorry. We were not able to find a match.</h3>
+                            <div className="error">
+                                <h3>We're sorry. We were not able to find a match.</h3>
+                                <button className="enter-manually" onClick={handleManual}  >Enter Manually</button>
 
-                            <button onClick={handleManual}  >Enter Manually</button>
+                            </div>
+
                         </>
                         :
                         ""}
