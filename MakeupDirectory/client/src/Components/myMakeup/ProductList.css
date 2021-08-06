@@ -6,17 +6,39 @@ div#product-list{
 button#add-product-button{
     display: flex;
     float: right;
-    margin-right: 55px;
+    margin-right: 100px;
+    background-color: #c17e79;
+    padding: 7px 5px 7px 5px;
+    border-radius: 5px;
+    border: #c17e79;
+    color: aliceblue;
+
+}
+p.filter{
+    margin-left: 55px;
+    color: #916F6D;
+    font-family: serif;
+    font-size: large;
+}
+select.select{
+    margin-left: 5px;
+    background-color:#ebcfbf;
+    border: #ebcfbf;
+    color: #916F6D ;
 }
 
 div.list-options{
-    margin-top: 25px;
+    padding-top: 25px;
     margin-bottom: 25px;
+}
+div.details{
+    display: flex;
 }
 
 div.card{
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    
 }
 
 img.card-image{
@@ -25,22 +47,40 @@ img.card-image{
     margin: auto;
 }
 
-/* div.1.card{
-    background-color: #7BC591!important;
+div.Foundation.card{
+    background-color: #EFB38F!important;
+    border-radius: 20px;
 }
 
-div.\2.card-body{
-    background-color: #221C6E!important;
+div.Blush.Bronzer.card{
+    background-color: #F7AB9B!important;
+    color: aliceblue;
+    border-radius: 20px;
 }
 
-div#3.card-body{
-    background-color: #1F91A3!important;
+div.Lips.card{
+    background-color: #E0E8DD!important;
+    border-radius: 20px;
 }
 
-div#4.card-body{
-    background-color: #A4DBF5!important;
+div.Eyes.card{
+    background-color: #FEDBB3!important;
+    border-radius: 20px;
 }
 
-div#5.card-body{
-    background-color: #FFD85C!important;
-} */
+div.Skin.Care.card{
+    background-color: #D1E7E4!important;
+    border-radius: 20px;
+}
+
+button#back-button{
+    display: flex;
+    float: right;
+    margin-right: 100px;
+    background-color: #c17e79;
+    padding: 7px 5px 7px 5px;
+    border-radius: 5px;
+    border: #c17e79;
+    color: aliceblue;
+
+}

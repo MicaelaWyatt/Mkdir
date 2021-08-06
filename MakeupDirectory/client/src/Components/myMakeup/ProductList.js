@@ -38,16 +38,16 @@ const ProductList = () => {
     return (
         <>
             <div class="list-options" >
-                <p>Filter</p>
-                <select onChange={handleInputChange} type="select" name="select" id="categoryId" >
-                    <option value="0" >My Products</option>
-                    <option value="1">Foundation</option>
-                    <option value="2">Blush/Bronzer</option>
-                    <option value="3">Lips</option>
-                    <option value="4">Eyes</option>
-                    <option value="5">Skin Care</option>
-                </select>
-                <button id="add-product-button" onClick={handleAddProduct} >Add product</button>
+                <p className="filter">Filter
+                    <select className="select" onChange={handleInputChange} type="select" name="select" id="categoryId" >
+                        <option value="0" >My Products</option>
+                        <option value="1">Foundation</option>
+                        <option value="2">Blush/Bronzer</option>
+                        <option value="3">Lips</option>
+                        <option value="4">Eyes</option>
+                        <option value="5">Skin Care</option>
+                    </select>
+                    <button id="add-product-button" onClick={handleAddProduct} >Add product</button></p>
             </div>
             <div id="product-list">
                 <div >

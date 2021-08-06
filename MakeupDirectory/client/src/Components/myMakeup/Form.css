@@ -1,0 +1,56 @@
+form{
+    width: 55%;
+    height: 500px;
+    background-color: #ebcfbf;
+    margin: 0 auto;
+    margin-top: 75px;
+    border-radius: 2rem;
+}
+
+div.form{
+    padding-top: 1px;
+}
+
+h2.form-header{
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-around;
+    color: #916F6D;
+    font-family: serif;
+}
+
+Input.input{
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+div.category-select{
+    margin-top: 25px;
+    margin-left: 10.25%;
+    margin-bottom: 25px;
+}
+
+div.PAO{
+    display: flex;
+    margin-left: 10.25%;
+}
+
+button.save{
+    margin-top: 50px;
+    margin-left: 43%;
+    width: 100px;
+    background-color: #c17e79;
+    padding: 7px 5px 7px 5px;
+    border-radius: 5px;
+    border: #c17e79;
+    color: aliceblue;
+}
+
+Label.descriptor{
+    color: #916F6D;
+    font-family: serif;
+    margin-right: 10px;
+
+}

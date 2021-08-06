@@ -9,7 +9,7 @@ export const ProductCard = ({ product, deleteAndSetProducts }) => {
     const createDateTime = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
     console.log(product.categoryId)
     return (
-        <Card className={product.categoryId}>
+        <Card className={product.category.name}>
             <CardBody className={product.categoryId} >
                 <h3 class="card-name">{product.name}</h3>
                 <div class="card-brand">{product.brand}</div>

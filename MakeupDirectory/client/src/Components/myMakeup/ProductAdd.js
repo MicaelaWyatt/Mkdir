@@ -21,8 +21,8 @@ export const ProductAdd = () => {
     return (
         <>
             <div className="Add-page" >
-                <h2>New Product</h2>
-                <div className="options"> <button className="search" onClick={handleSearch} >Search for product</button> <h6>or</h6> <button className="enter" onClick={handleManual}  >Enter Manually</button></div>
+                <h2 className="new-product-header">NEW PRODUCT</h2>
+                <div className="options"> <button className="search" onClick={handleSearch} >Search for product</button> <h4 className="or">or</h4> <button className="enter" onClick={handleManual}  >Enter Manually</button></div>
             </div>
         </>
     )

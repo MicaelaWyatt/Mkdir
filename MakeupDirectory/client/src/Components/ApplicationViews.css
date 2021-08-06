@@ -1,6 +1,22 @@
-main {
-    background-image: url('../Images/Background.png');
+main#no-cover {
+    background-image: url('../Images/background.png');
     background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: 100% 100%;
+    background-attachment: fixed!important;
+    background-size: cover!important;
+    /* height: 100% !important; */
+    /* min-height: 100vh!important; */
+    height: 100vh!important;
   }
+
+  main#search-view{
+    background-image: url('../Images/background.png');
+    background-repeat: no-repeat;
+  background-attachment: fixed!important;
+  background-size: cover!important;
+  }
+
+/* footer{
+  background-color: #53718e;
+  
+  height: 40px;
+} */
