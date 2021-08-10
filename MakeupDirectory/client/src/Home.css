@@ -26,3 +26,7 @@ h1.main-header{
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-weight:500;
 }
+
+a.navbar-brand.active{
+    padding-left: 10px;
+}
