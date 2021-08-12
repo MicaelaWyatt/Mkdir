@@ -1,6 +1,7 @@
 ## Makeup Directory
 Makeup Directory is a web application where users can track all their makeup and skincare products. Once a user enters a product the application lets the user know when to throw their product away
-<img src="./Mkdir.gif" alt="My Project GIF">
+
+<img src="./MakeupDirectory/client/src/Images/Mkdir.gif" alt="My Project GIF">
 
 ##Installation
 clone this repository in your terminal
@@ -20,3 +21,4 @@ Now go back to your terminal and type
 npm start 
 ```
 this will open up the application in your browser.
+
