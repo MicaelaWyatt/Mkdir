@@ -3,7 +3,7 @@ Makeup Directory is a web application where users can track all their makeup and
 
 <img src="./MakeupDirectory/client/src/Images/Mkdir.gif" alt="My Project GIF">
 
-##Installation
+## Installation
 clone this repository in your terminal
 ```bash
 git clone git@github.com:micaelacolpi/Mkdir.git
